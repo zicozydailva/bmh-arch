@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import New from "./pages/New";
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  HttpLink,
+  from,
+} from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
+
+const errorLink = onError(({ graphqlErrors, networkError }) => {
+  if (graphqlErrors) {
+    graphqlErrors.map(({ message, location, path }) =>
+      alert(`GraphQl Error: ${message}`)
+    );
+  }
+});
+
+const link = from([
+  errorLink,
+  new HttpLink({
+    uri: "https://us-central1-build-myhouse.cloudfunctions.net/bmhAPi/graphql",
+  }),
+]);
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: link,
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <BrowserRouter>
+        <ApolloProvider client={client}>
+          <Routes>
+            <Route path="/" element={<New />} />
+          </Routes>
+        </ApolloProvider>
+      </BrowserRouter>
+    </main>
   );
 }
 

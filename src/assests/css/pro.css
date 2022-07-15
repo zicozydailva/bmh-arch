@@ -1,0 +1,36 @@
+table {
+    border-collapse: collapse;
+  }
+  
+  th {
+    text-align: left;
+    padding: 1em 0.5em;
+    padding-bottom: 0.6em;
+  }
+  
+  td {
+    padding: 1em 0.5em;
+    font-size: smaller;
+    border-bottom: 1px solid lightgray;
+  }
+  
+  tr:hover td {
+    cursor: pointer;
+    background: rgb(226, 226, 226);
+  }
+  
+  th:nth-child(2) {
+    width: 200px;
+  }
+  
+  th:nth-child(3) {
+    width: 130px;
+  }
+  
+  th:nth-child(4) {
+    width: 130px;
+  }
+  
+  th:nth-child(5) {
+    width: 400px;
+  }
