@@ -9,6 +9,7 @@ import loader from "../assests/images/loading.gif";
 import Alert from "../components/Alert";
 import { CREATE_ARCHITECTPROFILE } from "../graphql/mutation";
 
+//new
 const New = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
